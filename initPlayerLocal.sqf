@@ -1,0 +1,1 @@
+[] execVM "BFT\init.sqf";
