@@ -46,9 +46,9 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 	if (_alpha > 0) then {
 		{
 			// Set name
-			_name = name _x;
+			private _name = name _x;
 			if (!isPlayer _x) then {
-				_name = "[AI] " + _name;
+				_name = ("[AI] " + _name);
 			};
 
 			// Draw icon
@@ -59,7 +59,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				_markerSize,
 				_markerSize,
 				getDir _x,
-				name _x,
+				_name,
 				1,
 				_textSize,
 				"TahomaB",
