@@ -42,8 +42,6 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 	_alpha = 0.012*_multiplier-0.2;
 
-	hintSilent str format ["%1\n%2\n%3", _multiplier, _markerSize, _textSize]; 
-
 	if (_alpha > 0) then {
 		{
 			if (side _x != side player) then { continue; };
