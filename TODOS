@@ -1,10 +1,4 @@
 Group markers
  - Allow custom names
+ - Show team info when clicking team marker
  - Make markers server side? At least synchronize updates
-
-Individuals on map
- - Vehicle icon when multiple people in vehicle
- 
-Show names when aiming at teammates
-
-Show team info when clicking team marker
