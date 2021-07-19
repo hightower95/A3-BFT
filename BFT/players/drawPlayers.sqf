@@ -43,11 +43,19 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 	_alpha = [0.012*_scale-0.2, 0, 1] call BIS_fnc_clamp;
 
 	if (_alpha > 0) then {
+		// Players that have already been marked (when they're in a vehicle with someone else);
+		private _alreadyMarkedPlayers = [];  
+		
 		{
-			if (side _x != side player) then { continue; };
+			// _x = unit to mark 
+			if (side _x != side player) then {continue};
+			if (_x in _alreadyMarkedPlayers) then {continue};
 
-			// Icon 
+			// Basic things 
 			private _icon = _x getVariable["BFT_player_icon", "iconMan"];
+			_text = name _x; 
+			_pos = getPos _x; 
+			_dir = getDir _x; 
 
 			if (_x getVariable["BFT_player_icon", ""] == "") then {
 				// Autoselect icon
@@ -81,22 +89,47 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				_colour = [playerSide, false] call BIS_fnc_sideColor;
 			};
 			if (_x getVariable ["ACE_isUnconscious", false]) then {_colour = [1, 0.5, 0];};
+
+			if (_x != vehicle _x) then { // Unit is in vehicle
+				// Position 
+				_pos = getPos vehicle _x; 
+				_dir = getDir vehicle _x; 
+
+				// Icon (Get from config)
+				_icon = getText (configfile >> "CfgVehicles" >> typeOf vehicle _x >> "icon");
+
+				// Text (Driver, SL, Medic, +count) , this ugly, might redo
+				_crew = crew vehicle _x; 
+				_text = name (_crew select 0);
+				if (count _crew >= 2) then {_text = _text + ", " + name (_crew select 1)};
+				if (count _crew >= 3) then {_text = _text + ", " + name (_crew select 2)};
+				if (count _crew >= 4) then {_text = _text + " +" + str (count _crew - 3)};
+
+				// Colour (Colour if all the same team, otherwise white) (Still to do, lazy atm)
+				_colour = [1,1,1];
+
+				// Add all units in vehicle to _alreadyMarkedPlayers
+				_alreadyMarkedPlayers append (crew vehicle _x); 
+			};
+
+			// Set alpha
 			_colour set [3, _alpha];
 
 			// Draw icon
 			_this select 0 drawIcon [
 				_icon,
 				_colour,
-				getPos _x,
+				_pos,
 				_markerSize,
 				_markerSize,
-				getDir _x,
-				name _x,
+				_dir,
+				_text,
 				1,
 				_textSize,
 				"TahomaB",
 				"right"
 			];
-		} forEach allPlayers;
+		// } forEach allPlayers;
+		} forEach allUnits;
 	};
 }];
