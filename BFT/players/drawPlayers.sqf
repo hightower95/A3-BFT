@@ -20,12 +20,13 @@ waitUntil {
 
 	Icons: 
 		iconMan
-		iconManAT
-		iconManEngineer
-		iconManExplosive
 		iconManLeader
 		iconManMedic
 		iconManMG
+		iconManEngineer
+		iconManAT
+
+		iconManExplosive
 		iconManOfficer
 		iconManRecon
 		iconManVirtual
@@ -45,13 +46,29 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 	if (_alpha > 0) then {
 		{
-			// Name
-			private _name = name _x;
-			if (!isPlayer _x) then {
-				_name = ("[AI] " + _name);
-			};
+			if (side _x != side player) then { continue; };
 
 			// Icon 
+			private _icon = _x getVariable["BFT_player_icon", "iconMan"];
+
+			if (_x getVariable["BFT_player_icon", ""] == "") then {
+				// Autoselect icon
+				if ((secondaryWeapon _x) != "") then {
+					_icon = "iconManAT";
+				};
+				if ((primaryweapon _x call BIS_fnc_itemtype) select 1 == "MachineGun" ) then {
+					_icon = "iconManMG";
+				};
+				if (_x getVariable ["ace_isengineer", 0] > 0) then { // ACE Engineer
+					_icon = "iconManEngineer";
+				};
+				if (_x getVariable ["ace_medical_medicclass", 0] > 0) then { // ACE Medic
+					_icon = "iconManMedic";
+				};
+				if (_x == leader group player) then {
+					_icon = "iconManLeader";
+				};
+			};
 
 			// Colour 
 			private _colour = [1,1,1];
@@ -70,18 +87,18 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 			// Draw icon
 			_this select 0 drawIcon [
-				"iconMan",
+				_icon,
 				_colour,
 				getPos _x,
 				_markerSize,
 				_markerSize,
 				getDir _x,
-				_name,
+				name _x,
 				1,
 				_textSize,
 				"TahomaB",
 				"right"
 			];
-		} forEach units (playerSide);
+		} forEach allUnits;
 	};
 }];

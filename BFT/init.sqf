@@ -1,9 +1,13 @@
 /*
 	Group variables: 
-	BFT_marker_type: marker type, can be: 
-		air, antiair, armor, art, hq, inf, installation, maint, mech_inf, med, mortar, motor_inf, naval, ordinance, plane, recon, service, support, uav, unknown
-	BFT_marker_color: marker color, see https://community.bistudio.com/wiki/Arma_3:_CfgMarkerColors 
-	BFT_marker_disable: obvious.
+		BFT_marker_type: marker type, can be: 
+			air, antiair, armor, art, hq, inf, installation, maint, mech_inf, med, mortar, motor_inf, naval, ordinance, plane, recon, service, support, uav, unknown
+		BFT_marker_color: marker color, see https://community.bistudio.com/wiki/Arma_3:_CfgMarkerColors 
+		BFT_marker_disable: obvious.
+
+	Player variables: 
+		BFT_player_icon: Player icon on map, can be: 
+			iconMan, iconManAT, iconManEngineer, iconManExplosive, iconManLeader, iconManMedic, iconManMG, iconManOfficer, iconManRecon, iconManVirtual
 */
 
 // Settings
