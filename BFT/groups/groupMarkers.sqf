@@ -31,7 +31,7 @@ while {true} do {
 		if (!_skip) then {
 			_markerPos = position leader _x; 
 			_markerType = _x getVariable ["BFT_marker_type", "inf"];
-			_markerColor = _x getVariable ["BFT_marker_color", "colorBLUFOR"];
+			_markerColor = _x getVariable ["BFT_marker_color", [playerSide, true] call BIS_fnc_sideColor];
 
 			// Get marker side, default to BLUFOR
 			private _markerSide = "b"; 
