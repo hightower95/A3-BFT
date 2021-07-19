@@ -7,12 +7,12 @@
 */
 
 // Settings
-_delay = 4; // Delay between squad marker updates 
-_onlyPlayers = false; // Sets the default show marker value for AI groups
+_delay = 10; // Delay between squad marker updates 
+_default = false; // Sets the default show marker value for groups
 
 // Squad markers 
 [] execVM "BFT\groups\groupSettings.sqf";
-[_delay, _onlyPlayers] execVM "BFT\groups\groupMarkers.sqf";
+[_delay, _default] execVM "BFT\groups\groupMarkers.sqf";
 
 // Player markers 
 [] execVM "BFT\players\drawPlayers.sqf";

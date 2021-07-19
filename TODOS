@@ -2,10 +2,10 @@ Group markers
  - Add menu to map
  - Allow custom names
  - Add icons to names? 
+ - Make markers server side? At least synchronize updates
 
 Individuals on map
  - Right icon
  - Vehicle icon when multiple people in vehicle
  
-
 Show names when aiming at teammates

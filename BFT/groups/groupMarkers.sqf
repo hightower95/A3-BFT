@@ -6,12 +6,11 @@
 
 	Parameter(s): 
 		0: NUMBER - delay between updates
-		1: STRING - side of the markers, "b" for BLUFOR, "o" for OPFOR, "n" for INDEP
 
 	Returns: 
 	nothing
 */
-params ["_delay", "_onlyPlayers"];
+params ["_delay", "_default"];
 
 // Map markers
 _allMarkers = [];
@@ -25,8 +24,8 @@ while {true} do {
 	// Create new markers
 	{
 		_skip = false; 
-		if (_x getVariable ["BFT_marker_disable", false]) then {_skip = true;};
-		if (count units _x > 0) then {_skip = true;};
+		if (_x getVariable ["BFT_marker_enable", _default]) then {_skip = true;};
+		if (count units _x <= 0) then {_skip = true;};
 
 		// Create marker if current group isn't skipped
 		if (!_skip) then {
