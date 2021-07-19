@@ -26,6 +26,7 @@ while {true} do {
 		_skip = false; 
 		if (_x getVariable ["BFT_marker_enable", _default]) then {_skip = true;};
 		if (count units _x <= 0) then {_skip = true;};
+		if (side _x != playerSide) then {_skip = true;};
 
 		// Create marker if current group isn't skipped
 		if (!_skip) then {
