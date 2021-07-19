@@ -36,11 +36,11 @@ waitUntil {
 findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 	params ["_control"];
 
-	_multiplier = 10^(abs log (ctrlMapScale _control));
-	_markerSize = (1.8 * 0.15) * _multiplier;
-	_textSize = (0.0012 * 0.15) * _multiplier;
+	_scale = 10^(abs log (ctrlMapScale _control));
+	_markerSize = (1.8 * 0.15) * _scale;
+	_textSize = (0.0012 * 0.15) * _scale;
 
-	_alpha = 0.012*_multiplier-0.2;
+	_alpha = 0.012*_scale-0.2;
 
 	if (_alpha > 0) then {
 		{
@@ -97,6 +97,6 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				"TahomaB",
 				"right"
 			];
-		} forEach allUnits;
+		} forEach allPlayers;
 	};
 }];

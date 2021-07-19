@@ -23,32 +23,29 @@ while {true} do {
 
 	// Create new markers
 	{
-		_skip = false; 
-		if (_x getVariable ["BFT_marker_enable", _default]) then {_skip = true;};
-		if (count units _x <= 0) then {_skip = true;};
-		if (side _x != playerSide) then {_skip = true;};
+		if (_x getVariable ["BFT_marker_enable", _default]) then {continue;};
+		if (count units _x <= 0) then {continue;};
+		if (side _x != playerSide) then {continue;};
 
-		// Create marker if current group isn't skipped
-		if (!_skip) then {
-			_markerPos = position leader _x; 
-			_markerType = _x getVariable ["BFT_marker_type", "inf"];
-			_markerColor = _x getVariable ["BFT_marker_color", [playerSide, true] call BIS_fnc_sideColor];
+		// Create marker
+		_markerPos = position leader _x; 
+		_markerType = _x getVariable ["BFT_marker_type", "inf"];
+		_markerColor = _x getVariable ["BFT_marker_color", [playerSide, true] call BIS_fnc_sideColor];
 
-			// Get marker side, default to BLUFOR
-			private _markerSide = "b"; 
-			if (playerSide == opfor) then {_markerSide = "o"};
-			if (playerSide == independent) then {_markerSide = "n"};
+		// Get marker side, default to BLUFOR
+		private _markerSide = "b"; 
+		if (playerSide == opfor) then {_markerSide = "o"};
+		if (playerSide == independent) then {_markerSide = "n"};
 
-			// Create marker
-			_marker = createMarkerLocal [groupId _x, _markerPos];
-			_marker setMarkerShapeLocal "ICON";
-			_marker setMarkerTypeLocal (_markerSide + "_" + _markerType);
-			_marker setMarkerTextLocal groupId _x;
-			_marker setMarkerColorLocal _markerColor;
+		// Create marker
+		_marker = createMarkerLocal [groupId _x, _markerPos];
+		_marker setMarkerShapeLocal "ICON";
+		_marker setMarkerTypeLocal (_markerSide + "_" + _markerType);
+		_marker setMarkerTextLocal groupId _x;
+		_marker setMarkerColorLocal _markerColor;
 
-			// Add marker to array 
-			_allMarkers pushBack _marker;
-		}
+		// Add marker to array 
+		_allMarkers pushBack _marker;
 	} forEach allGroups;
 
 	sleep(_delay);
