@@ -45,16 +45,26 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 	if (_alpha > 0) then {
 		{
-			// Set name
+			// Name
 			private _name = name _x;
 			if (!isPlayer _x) then {
 				_name = ("[AI] " + _name);
 			};
 
+			// Icon 
+
+			// Colour 
+			private _colour = [1,1,1];
+			if (_x getVariable ["ACE_isUnconscious", false]) then {
+				_colour = [1, 0.5, 0];
+				systemChat "Drawing unconscious...";
+			};
+			_colour pushBack _alpha;
+
 			// Draw icon
 			_this select 0 drawIcon [
 				"iconMan",
-				[1,1,1,_alpha],
+				_colour,
 				getPos _x,
 				_markerSize,
 				_markerSize,
@@ -65,6 +75,6 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				"TahomaB",
 				"right"
 			];
-		} forEach units (side player);
+		} forEach units (playerSide);
 	};
 }];
