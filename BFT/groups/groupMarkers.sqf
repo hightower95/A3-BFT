@@ -11,7 +11,7 @@
 	Returns: 
 	nothing
 */
-params ["_delay", "_markerSide", "_onlyPlayers"];
+params ["_delay", "_onlyPlayers"];
 
 // Map markers
 _allMarkers = [];
@@ -26,12 +26,18 @@ while {true} do {
 	{
 		_skip = false; 
 		if (_x getVariable ["BFT_marker_disable", false]) then {_skip = true;};
+		if (count units _x > 0) then {_skip = true;};
 
 		// Create marker if current group isn't skipped
 		if (!_skip) then {
 			_markerPos = position leader _x; 
 			_markerType = _x getVariable ["BFT_marker_type", "inf"];
 			_markerColor = _x getVariable ["BFT_marker_color", "colorBLUFOR"];
+
+			// Get marker side, default to BLUFOR
+			private _markerSide = "b"; 
+			if (playerSide == opfor) then {_markerSide = "o"};
+			if (playerSide == independent) then {_markerSide = "n"};
 
 			// Create marker
 			_marker = createMarkerLocal [groupId _x, _markerPos];

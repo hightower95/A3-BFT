@@ -8,12 +8,11 @@
 
 // Settings
 _delay = 4; // Delay between squad marker updates 
-_markerSide = "b"; // "b" for BLUFOR, "o" for OPFOR, "n" for INDEP
 _onlyPlayers = false; // Sets the default show marker value for AI groups
 
 // Squad markers 
-[_markerSide] execVM "BFT\groups\groupSettings.sqf";
-[_delay, _markerSide, _onlyPlayers] execVM "BFT\groups\groupMarkers.sqf";
+[] execVM "BFT\groups\groupSettings.sqf";
+[_delay, _onlyPlayers] execVM "BFT\groups\groupMarkers.sqf";
 
 // Player markers 
 [] execVM "BFT\players\drawPlayers.sqf";

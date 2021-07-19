@@ -15,8 +15,6 @@
 	 - Cusom name
 */
 
-params ["_markerSide"];
-
 // Add options to ACE menu
 action_BFT = ["Jacco_BFT", "BFT", "", {true}, {leader group player == player}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "ACE_TeamManagement"], action_BFT] call ace_interact_menu_fnc_addActionToObject;
