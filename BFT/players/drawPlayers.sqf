@@ -9,7 +9,6 @@
 	Returns: 
 	nothing
 */
-_size = 10; 
 
 // Wait until the map control actually exists, for some reason it doesnt work without this.
 waitUntil {
@@ -35,12 +34,13 @@ waitUntil {
 
 findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 	params ["_control"];
+	_maxScale = 250; // Max scale for the icons & text
 
-	_scale = 10^(abs log (ctrlMapScale _control));
+	_scale = (10^(abs log (ctrlMapScale _control))) min _maxScale; 
 	_markerSize = (1.8 * 0.15) * _scale;
 	_textSize = (0.0012 * 0.15) * _scale;
 
-	_alpha = 0.012*_scale-0.2;
+	_alpha = [0.012*_scale-0.2, 0, 1] call BIS_fnc_clamp;
 
 	if (_alpha > 0) then {
 		{
