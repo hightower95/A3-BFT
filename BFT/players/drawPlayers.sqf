@@ -55,11 +55,18 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 			// Colour 
 			private _colour = [1,1,1];
-			if (_x getVariable ["ACE_isUnconscious", false]) then {
-				_colour = [1, 0.5, 0];
-				systemChat "Drawing unconscious...";
+			if (player in (units group _x)) then {
+				switch (assignedTeam  _x) do {
+					case "RED": { 		_colour = [0.9, 	0.1, 	0.1]; };
+					case "GREEN": { 	_colour = [0.1, 	0.9, 	0.1]; };
+					case "BLUE": { 		_colour = [0.1, 	0.1, 	0.9]; };
+					case "YELLOW": { 	_colour = [0.9, 	0.9, 	0.1]; };
+				};
+			} else {
+				_colour = [playerSide, false] call BIS_fnc_sideColor;
 			};
-			_colour pushBack _alpha;
+			if (_x getVariable ["ACE_isUnconscious", false]) then {_colour = [1, 0.5, 0];};
+			_colour set [3, _alpha];
 
 			// Draw icon
 			_this select 0 drawIcon [
