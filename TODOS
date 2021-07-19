@@ -3,6 +3,7 @@ Group markers
  - Allow custom names
  - Add icons to names? 
  - Make markers server side? At least synchronize updates
+ - Make the marker position a weighted average
 
 Individuals on map
  - Right icon
