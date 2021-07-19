@@ -19,4 +19,5 @@ _default = false; // Sets the default show marker value for groups
 [_delay, _default] execVM "BFT\groups\groupMarkers.sqf";
 
 // Player markers 
+[] execVM "BFT\players\playerSettings.sqf";
 [] execVM "BFT\players\drawPlayers.sqf";
