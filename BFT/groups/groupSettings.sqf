@@ -13,17 +13,18 @@
 	TODO: 
 	 - Also add BFT to map interactions
 	 - Cusom name
+	 - Update own marker whenever you change a setting
 */
 
 // Add options to ACE menu
-action_BFT = ["Jacco_BFT", "BFT", "", {true}, {leader group player == player}] call ace_interact_menu_fnc_createAction;
-[player, 1, ["ACE_SelfActions", "ACE_TeamManagement"], action_BFT] call ace_interact_menu_fnc_addActionToObject;
+action_BFT = ["Jacco_BFT", "BFT", "", {true}, {leader group player == player && visibleMap}] call ace_interact_menu_fnc_createAction;
+[player, 1, ["ACE_SelfActions"], action_BFT] call ace_interact_menu_fnc_addActionToObject;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Colors 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 action_BFT_Colors = ["Jacco_BFT_Colors", "Color", "BFT\icons\colorWheel.paa", {true}, {true}] call ace_interact_menu_fnc_createAction;
-[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT"], action_BFT_Colors] call ace_interact_menu_fnc_addActionToObject;
+[player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Colors] call ace_interact_menu_fnc_addActionToObject;
 
 // Array with available colours and the name they're displayed as
 _markerColours_side = [
@@ -59,12 +60,12 @@ _markerColours_other = [
 	};
 
 	_action = [("Jacco_BFT_Colors_"+_name), _name, "BFT\icons\dot\"+_name+".paa", _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT", "Jacco_BFT_Colors"], _action] call ace_interact_menu_fnc_addActionToObject;
+	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], _action] call ace_interact_menu_fnc_addActionToObject;
 } forEach _markerColours_side;
 
 // Add other colours
 action_BFT_Colors_Other = ["Jacco_BFT_Colours_Other", "Other colors", "BFT\icons\plus.paa", {true}, {true}] call ace_interact_menu_fnc_createAction;
-[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT", "Jacco_BFT_Colors"], action_BFT_Colors_Other] call ace_interact_menu_fnc_addActionToObject;
+[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], action_BFT_Colors_Other] call ace_interact_menu_fnc_addActionToObject;
 
 
 {
@@ -77,14 +78,14 @@ action_BFT_Colors_Other = ["Jacco_BFT_Colours_Other", "Other colors", "BFT\icons
 	};
 
 	_action = [("Jacco_BFT_Colors_"+_name), _name, "BFT\icons\dot\"+_name+".paa", _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT", "Jacco_BFT_Colors", "Jacco_BFT_Colours_Other"], _action] call ace_interact_menu_fnc_addActionToObject;
+	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors", "Jacco_BFT_Colours_Other"], _action] call ace_interact_menu_fnc_addActionToObject;
 } forEach _markerColours_other;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Team name
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 action_BFT_Name = ["Jacco_BFT_Name", "Name", "", {true}, {true}] call ace_interact_menu_fnc_createAction;
-[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT"], action_BFT_Name] call ace_interact_menu_fnc_addActionToObject;
+[player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Name] call ace_interact_menu_fnc_addActionToObject;
 
 _teamNames = [
 	"Zulu", 
@@ -103,14 +104,14 @@ _teamNames = [
 		(group player) setGroupIdGlobal [_params];
 	};
 	_action = ["Jacco_BFT_Names_"+_x, _x, "", _statement, {true}, {}, _x] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT", "Jacco_BFT_Name"], _action] call ace_interact_menu_fnc_addActionToObject;
+	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Name"], _action] call ace_interact_menu_fnc_addActionToObject;
 } foreach _teamNames;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Team icon 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 action_BFT_Icon = ["Jacco_BFT_Icons", "Icon", "", {true}, {true}] call ace_interact_menu_fnc_createAction;
-[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT"], action_BFT_Icon] call ace_interact_menu_fnc_addActionToObject;
+[player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Icon] call ace_interact_menu_fnc_addActionToObject;
 
 _icons = [
 	["inf", "Infantry"], 
@@ -147,11 +148,11 @@ _additionalIcons = [
 	};
 
 	_action = [("Jacco_BFT_Icons_"+_icon), _name, "", _statement, {true}, {}, _icon] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT", "Jacco_BFT_Icons"], _action] call ace_interact_menu_fnc_addActionToObject;
+	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Icons"], _action] call ace_interact_menu_fnc_addActionToObject;
 } forEach _icons;
 
 action_BFT_Icons_Other = ["Jacco_BFT_Icons_Other", "Other icons", "BFT\icons\plus.paa", {true}, {true}] call ace_interact_menu_fnc_createAction;
-[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT", "Jacco_BFT_Icons"], action_BFT_Icons_Other] call ace_interact_menu_fnc_addActionToObject;
+[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Icons"], action_BFT_Icons_Other] call ace_interact_menu_fnc_addActionToObject;
 
 {
 	_icon = _x select 0; 
@@ -163,14 +164,14 @@ action_BFT_Icons_Other = ["Jacco_BFT_Icons_Other", "Other icons", "BFT\icons\plu
 	};
 
 	_action = [("Jacco_BFT_Icons_"+_icon), _name, "", _statement, {true}, {}, _icon] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT", "Jacco_BFT_Icons", "Jacco_BFT_Icons_Other"], _action] call ace_interact_menu_fnc_addActionToObject;
+	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Icons", "Jacco_BFT_Icons_Other"], _action] call ace_interact_menu_fnc_addActionToObject;
 } forEach _additionalIcons;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable/Disable team tracker
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 action_BFT_Enable = ["Jacco_BFT_Enable", "Disable tracker", "", {(group player) setVariable ["BFT_marker_enable", true, true]}, {!((group player) getVariable ["BFT_marker_enable", false]);}] call ace_interact_menu_fnc_createAction;
-[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT"], action_BFT_Enable] call ace_interact_menu_fnc_addActionToObject;
+[player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Enable] call ace_interact_menu_fnc_addActionToObject;
 
 action_BFT_Disable = ["Jacco_BFT_Disable", "Enable tracker", "", {(group player) setVariable ["BFT_marker_enable", false, true]}, {((group player) getVariable ["BFT_marker_enable", false]);}] call ace_interact_menu_fnc_createAction;
-[player, 1, ["ACE_SelfActions", "ACE_TeamManagement", "Jacco_BFT"], action_BFT_Disable] call ace_interact_menu_fnc_addActionToObject;
+[player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Disable] call ace_interact_menu_fnc_addActionToObject;
