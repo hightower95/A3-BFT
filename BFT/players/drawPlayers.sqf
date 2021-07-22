@@ -59,6 +59,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 			if (_x getVariable["BFT_player_icon", ""] == "") then {
 				// Autoselect icon
+				_icon = "iconMan"; 
 				if ((secondaryWeapon _x) != "") then {
 					_icon = "iconManAT";
 				};
@@ -129,7 +130,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				"TahomaB",
 				"right"
 			];
-		// } forEach allPlayers;
-		} forEach allUnits;
+		} forEach allPlayers;
+		// } forEach allUnits;
 	};
 }];

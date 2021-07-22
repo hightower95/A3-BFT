@@ -2,3 +2,7 @@ Group markers
  - Allow custom names
  - Show team info when clicking team marker
  - Make markers server side? At least synchronize updates
+
+Auto icon doesnt work when just rifleman. 
+Vehicle icon is always white (Even when all units are in someone elses group)
+Ace incapacitated people don't show up (Might be cause they're CIV)
