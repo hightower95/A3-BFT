@@ -84,7 +84,7 @@ action_BFT_Colors_Other = ["Jacco_BFT_Colours_Other", "Other colors", "BFT\icons
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Team name
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-action_BFT_Name = ["Jacco_BFT_Name", "Name", "", {true}, {true}] call ace_interact_menu_fnc_createAction;
+action_BFT_Name = ["Jacco_BFT_Name", "Name", "BFT\icons\pen.paa", {true}, {true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Name] call ace_interact_menu_fnc_addActionToObject;
 
 _teamNames = [
@@ -110,7 +110,7 @@ _teamNames = [
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Team icon 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-action_BFT_Icon = ["Jacco_BFT_Icons", "Icon", "", {true}, {true}] call ace_interact_menu_fnc_createAction;
+action_BFT_Icon = ["Jacco_BFT_Icons", "Icon", "BFT\icons\BFT.paa", {true}, {true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Icon] call ace_interact_menu_fnc_addActionToObject;
 
 _icons = [
@@ -170,8 +170,8 @@ action_BFT_Icons_Other = ["Jacco_BFT_Icons_Other", "Other icons", "BFT\icons\plu
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable/Disable team tracker
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-action_BFT_Enable = ["Jacco_BFT_Enable", "Disable tracker", "", {(group player) setVariable ["BFT_marker_enable", true, true]}, {!((group player) getVariable ["BFT_marker_enable", false]);}] call ace_interact_menu_fnc_createAction;
+action_BFT_Enable = ["Jacco_BFT_Enable", "Disable tracker", "BFT\icons\off.paa", {(group player) setVariable ["BFT_marker_enable", true, true]}, {!((group player) getVariable ["BFT_marker_enable", false]);}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Enable] call ace_interact_menu_fnc_addActionToObject;
 
-action_BFT_Disable = ["Jacco_BFT_Disable", "Enable tracker", "", {(group player) setVariable ["BFT_marker_enable", false, true]}, {((group player) getVariable ["BFT_marker_enable", false]);}] call ace_interact_menu_fnc_createAction;
+action_BFT_Disable = ["Jacco_BFT_Disable", "Enable tracker", "BFT\icons\on.paa", {(group player) setVariable ["BFT_marker_enable", false, true]}, {((group player) getVariable ["BFT_marker_enable", false]);}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Disable] call ace_interact_menu_fnc_addActionToObject;

@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=43;
+		nextID=48;
 	};
 	class Camera
 	{
-		pos[]={3044.4485,82.914322,7482.6128};
-		dir[]={0.43883303,-0.49334997,-0.75102025};
-		up[]={0.24889696,0.86983097,-0.42596307};
-		aside[]={-0.86340952,-1.4901161e-008,-0.50450385};
+		pos[]={3031.3918,87.21933,7484.4165};
+		dir[]={0.69107461,-0.39088714,-0.60796648};
+		up[]={0.29348201,0.92043859,-0.25818807};
+		aside[]={-0.66051823,0,-0.75081003};
 	};
 };
 binarizationWanted=0;
@@ -24,13 +24,14 @@ addons[]=
 {
 	"A3_Modules_F_Curator_Curator",
 	"A3_Characters_F",
-	"A3_Characters_F_Mark"
+	"A3_Characters_F_Mark",
+	"A3_Characters_F_Tank"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=3;
+		items=4;
 		class Item0
 		{
 			className="A3_Modules_F_Curator";
@@ -49,6 +50,13 @@ class AddonsMetaData
 		{
 			className="A3_Characters_F_Mark";
 			name="Arma 3 Marksmen - Characters and Clothing";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item3
+		{
+			className="A3_Characters_F_Tank";
+			name="Arma 3 Tank - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -134,7 +142,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=2;
+		items=3;
 		class Item0
 		{
 			dataType="Logic";
@@ -239,7 +247,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3058.4241,68.328552,7464.0566};
-						angles[]={0,0.43030941,0};
+						angles[]={0,0.43031093,0};
 					};
 					side="West";
 					flags=7;
@@ -301,7 +309,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3060.8826,68.08091,7457.4268};
-						angles[]={0,0.43030941,0};
+						angles[]={0,0.43031093,0};
 					};
 					side="West";
 					flags=5;
@@ -361,7 +369,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3051.7942,68.419601,7461.5981};
-						angles[]={0,0.43030941,0};
+						angles[]={0,0.43031093,0};
 					};
 					side="West";
 					flags=5;
@@ -423,7 +431,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3063.3411,67.826653,7450.7969};
-						angles[]={0,0.43030941,0};
+						angles[]={0,0.43031093,0};
 					};
 					side="West";
 					flags=5;
@@ -483,7 +491,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3045.1641,68.501549,7459.1396};
-						angles[]={0,0.43030941,0};
+						angles[]={0,0.43031093,0};
 					};
 					side="West";
 					flags=5;
@@ -543,7 +551,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3065.7996,67.591629,7444.1665};
-						angles[]={0,0.43030941,0};
+						angles[]={0,0.43031093,0};
 					};
 					side="West";
 					flags=5;
@@ -604,7 +612,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3038.5347,68.594116,7456.6812};
-						angles[]={0,0.43030941,0};
+						angles[]={0,0.43031093,0};
 					};
 					side="West";
 					flags=5;
@@ -664,7 +672,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3068.2578,67.352913,7437.5371};
-						angles[]={0,0.43030941,0};
+						angles[]={0,0.43031093,0};
 					};
 					side="West";
 					flags=5;
@@ -725,7 +733,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={3033.6379,68.640488,7454.5195};
-						angles[]={0,0.43030941,0};
+						angles[]={0,0.43031093,0};
 					};
 					side="West";
 					flags=5;
@@ -784,6 +792,130 @@ class Mission
 			{
 			};
 			id=32;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="groupID";
+					expression="                            if (isNil 'CBA_fnc_setCallsign') then {                                _this setGroupID [_value];                            } else {                                [_this, _value] call CBA_fnc_setCallsign;                            };                        ";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="Whiskey";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item2
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=4;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3124.0701,69.13163,7591.2192};
+					};
+					side="West";
+					flags=7;
+					class Attributes
+					{
+						rank="SERGEANT";
+					};
+					id=44;
+					type="B_Soldier_TL_F";
+				};
+				class Item1
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3129.0701,68.975243,7586.2192};
+					};
+					side="West";
+					flags=5;
+					class Attributes
+					{
+						skill=0.44999999;
+						rank="CORPORAL";
+					};
+					id=45;
+					type="B_soldier_AR_F";
+				};
+				class Item2
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3119.0701,69.232605,7586.2192};
+					};
+					side="West";
+					flags=5;
+					class Attributes
+					{
+						skill=0.40000001;
+					};
+					id=46;
+					type="B_Soldier_F";
+				};
+				class Item3
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3134.0701,68.818604,7581.2192};
+					};
+					side="West";
+					flags=5;
+					class Attributes
+					{
+						skill=0.40000001;
+					};
+					id=47;
+					type="B_soldier_LAT2_F";
+				};
+			};
+			class Attributes
+			{
+			};
+			id=43;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="groupID";
+					expression="                            if (isNil 'CBA_fnc_setCallsign') then {                                _this setGroupID [_value];                            } else {                                [_this, _value] call CBA_fnc_setCallsign;                            };                        ";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="Bravo";
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 	};
 };
