@@ -52,10 +52,14 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 			if (_x in _alreadyMarkedPlayers) then {continue};
 
 			// Basic things 
-			_icon = _x getVariable "diwako_dui_radar_compass_icon";
+			_icon = _x getVariable ["diwako_dui_radar_compass_icon", ""];
 			_text = name _x; 
 			_pos = getPos _x; 
 			_dir = getDir _x; 
+
+			if (_icon == "") then {
+				
+			};
 
 			// Colour 
 			private _colour = [1,1,1];
@@ -105,7 +109,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				"TahomaB",
 				"right"
 			];
-		} forEach allPlayers;
-		// } forEach allUnits;
+		// } forEach allPlayers;
+		} forEach units group player;
 	};
 }];
