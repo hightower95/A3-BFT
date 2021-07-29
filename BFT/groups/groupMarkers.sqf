@@ -30,7 +30,7 @@ while {true} do {
 		// Position
 		// _markerPos = position leader _x; 
 		_markerPos = position leader _x;
-		_weight = 10; // Starting weight, amount of times we count the leader position.  
+		_weight = 3 * (count units group player); // Starting weight, amount of times we count the leader position.  
 		{
 			// If unit is within 500m, continue
 			if ((_x distance2D (leader group _x)) > 500) then {continue};

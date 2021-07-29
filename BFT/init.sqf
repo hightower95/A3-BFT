@@ -11,7 +11,7 @@
 */
 
 // Settings
-_delay = 10; // Delay between squad marker updates 
+_delay = 4; // Delay between squad marker updates 
 _default = false; // Sets the default show marker value for groups
 
 // Squad markers 
@@ -20,3 +20,6 @@ _default = false; // Sets the default show marker value for groups
 
 // Player markers 
 [] execVM "BFT\players\drawPlayers.sqf";
+
+// Troop info 
+// [] execVM "BFT\troop\troopInfo.sqf"
