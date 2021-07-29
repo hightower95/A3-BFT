@@ -12,10 +12,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3041.2854,104.01363,7509.0469};
-		dir[]={0.77027076,-0.24723847,-0.5878402};
-		up[]={0.19654231,0.96895474,-0.14999333};
-		aside[]={-0.60667467,-7.4505806e-009,-0.79495031};
+		pos[]={3044.4485,82.914322,7482.6128};
+		dir[]={0.43883303,-0.49334997,-0.75102025};
+		up[]={0.24889696,0.86983097,-0.42596307};
+		aside[]={-0.86340952,-1.4901161e-008,-0.50450385};
 	};
 };
 binarizationWanted=0;
@@ -62,6 +62,51 @@ randomSeed=1071393;
 class ScenarioData
 {
 	author="JACCO";
+	disabledAI=1;
+};
+class CustomAttributes
+{
+	class Category0
+	{
+		name="Multiplayer";
+		class Attribute0
+		{
+			property="RespawnTemplates";
+			expression="true";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"ARRAY"
+						};
+					};
+					class value
+					{
+						items=1;
+						class Item0
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"STRING"
+									};
+								};
+								value="None";
+							};
+						};
+					};
+				};
+			};
+		};
+		nAttributes=1;
+	};
 };
 class Mission
 {
