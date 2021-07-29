@@ -10,11 +10,6 @@
 	nothing
 */
 
-// Wait until the map control actually exists, for some reason it doesnt work without this.
-waitUntil {
-	!isNull (findDisplay 12 displayCtrl 51);
-};
-
 /*
 
 	Icons: 
@@ -31,6 +26,11 @@ waitUntil {
 		iconManVirtual
 
 */
+
+// Wait until the map control actually exists, for some reason it doesnt work without this.
+waitUntil {
+	!isNull (findDisplay 12 displayCtrl 51);
+};
 
 findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 	params ["_control"];
@@ -52,30 +52,10 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 			if (_x in _alreadyMarkedPlayers) then {continue};
 
 			// Basic things 
-			private _icon = _x getVariable["BFT_player_icon", "iconMan"];
+			_icon = _x getVariable "diwako_dui_radar_compass_icon";
 			_text = name _x; 
 			_pos = getPos _x; 
 			_dir = getDir _x; 
-
-			if (_x getVariable["BFT_player_icon", ""] == "") then {
-				// Autoselect icon
-				_icon = "iconMan"; 
-				if ((secondaryWeapon _x) != "") then {
-					_icon = "iconManAT";
-				};
-				if ((primaryweapon _x call BIS_fnc_itemtype) select 1 == "MachineGun" ) then {
-					_icon = "iconManMG";
-				};
-				if (_x getVariable ["ace_isengineer", 0] > 0) then { // ACE Engineer
-					_icon = "iconManEngineer";
-				};
-				if (_x getVariable ["ace_medical_medicclass", 0] > 0) then { // ACE Medic
-					_icon = "iconManMedic";
-				};
-				if (_x == leader group player) then {
-					_icon = "iconManLeader";
-				};
-			};
 
 			// Colour 
 			private _colour = [1,1,1];
