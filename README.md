@@ -26,5 +26,6 @@ this setVariable ["BFT_marker_color", "ColorOrange"];
 - Player markers
   - Vehicle icon colour (rn it's always white, I want it to be the right team colour or side colour if no squadmates)
   - Ace incapacitated people don't show up (Might be cause they're CIV, fix later? (: )
+  - Follow DUI font setting
 - Troop overview
   - A tab on the map with all teams/units
