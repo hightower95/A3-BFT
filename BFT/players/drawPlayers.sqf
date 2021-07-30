@@ -43,8 +43,6 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 	_alpha = [0.03*_scale-0.2, 0, 1] call BIS_fnc_clamp;
 
-	hint str _scale; 
-
 	if (_alpha > 0) then {
 		// Players that have already been marked (when they're in a vehicle with someone else);
 		private _alreadyMarkedPlayers = [];  
