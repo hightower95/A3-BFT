@@ -37,10 +37,13 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 	_maxScale = 250; // Max scale for the icons & text
 
 	_scale = (10^(abs log (ctrlMapScale _control))) min _maxScale; 
-	_markerSize = (1.8 * 0.15) * _scale;
-	_textSize = (0.0012 * 0.15) * _scale;
 
-	_alpha = [0.012*_scale-0.2, 0, 1] call BIS_fnc_clamp;
+	_markerSize = (1.8 * 0.13) * _scale;
+	_textSize = (0.0015 * 0.13) * _scale;
+
+	_alpha = [0.03*_scale-0.2, 0, 1] call BIS_fnc_clamp;
+
+	hint str _scale; 
 
 	if (_alpha > 0) then {
 		// Players that have already been marked (when they're in a vehicle with someone else);
