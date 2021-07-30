@@ -23,7 +23,7 @@ while {true} do {
 
 	// Create new markers
 	{
-		if (_x getVariable ["BFT_marker_enable", _default]) then {continue;};
+		if !(_x getVariable ["BFT_marker_enable", _default]) then {continue;};
 		if (count units _x <= 0) then {continue;};
 		if (side _x != playerSide) then {continue;};
 
