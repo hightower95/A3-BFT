@@ -10,23 +10,6 @@
 	nothing
 */
 
-/*
-
-	Icons: 
-		iconMan
-		iconManLeader
-		iconManMedic
-		iconManMG
-		iconManEngineer
-		iconManAT
-
-		iconManExplosive
-		iconManOfficer
-		iconManRecon
-		iconManVirtual
-
-*/
-
 // Wait until the map control actually exists, for some reason it doesnt work without this.
 waitUntil {
 	!isNull (findDisplay 12 displayCtrl 51);
