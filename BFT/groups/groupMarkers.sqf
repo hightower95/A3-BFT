@@ -68,5 +68,5 @@ while {true} do {
 		_allMarkers pushBack _marker;
 	} forEach allGroups;
 
-	sleep(_delay);
+	sleep(_delay - (serverTime % _delay));
 }
