@@ -15,6 +15,16 @@ waitUntil {
 	!isNull (findDisplay 12 displayCtrl 51);
 };
 
+fnc_vehicleIconColour = {
+
+};
+
+fnc_unitIcon = {
+	private _player = [] call CBA_fnc_currentUnit;
+	private _iconNamespace = missionNamespace getVariable format["diwako_dui_main_icon_%1", diwako_dui_icon_style];
+	[_x, _iconNamespace, _player, true] call diwako_dui_radar_fnc_getIcon;
+};
+
 findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 	params ["_control"];
 	_maxScale = 250; // Max scale for the icons & text
@@ -36,20 +46,14 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 			// Exit criteria
 			if (side _x != side player) then {continue};
 			if (_x in _alreadyMarkedPlayers) then {continue};
-			if (!isNull (getAssignedCuratorLogic _x)) then {continue}; // If unit is zeus
+			// if (!isNull (getAssignedCuratorLogic _x)) then {continue}; // If unit is zeus
 
 			// Basic things 
-			_icon = _x getVariable ["diwako_dui_radar_compass_icon", ""];
 			_text = name _x; 
 			_pos = getPos _x; 
 			_dir = getDir _x; 
 
-			if (_icon == "") then {
-				private _player = [] call CBA_fnc_currentUnit;
-				private _iconNamespace = missionNamespace getVariable format["diwako_dui_main_icon_%1", diwako_dui_icon_style];
-			
-				_icon = [_x, _iconNamespace, _player, true] call diwako_dui_radar_fnc_getIcon;
-			};
+			_icon = _x getVariable ["diwako_dui_radar_compass_icon", [] call fnc_unitIcon];
 
 			// Colour 
 			private _colour = [playerSide, false] call BIS_fnc_sideColor;
@@ -81,6 +85,8 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 				// Add all units in vehicle to _alreadyMarkedPlayers
 				_alreadyMarkedPlayers append (crew vehicle _x); 
+			} else { // Unit is not in vehilce
+				
 			};
 
 			// Set alpha
@@ -101,7 +107,6 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				"right"
 			];
 		} forEach allPlayers;
-		// } forEach units group player;
 		// } forEach allUnits;
 	};
 }];
