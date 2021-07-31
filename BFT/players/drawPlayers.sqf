@@ -18,7 +18,30 @@ waitUntil {
 fnc_vehicleIconColour = {
 	params ["_vehicle"];
 
-	[playerSide, false] call BIS_fnc_sideColor;
+	_color = [0,0,0];
+	{
+		if !(_x in units group player) then {continue}; 
+
+		_teamColor = + (_x getVariable "diwako_dui_main_compass_color"); 
+
+		// Set color first time
+		if (_color isEqualTo [0,0,0]) then {
+			_color = + _teamColor; 
+			continue; 
+		};
+
+		// Set color to white if the new colour is different
+		if !(_color isEqualTo _teamColor) then {
+			_color = [1,1,1];
+			break;
+		}
+	} forEach (crew _vehicle);
+
+	if (_color isEqualTo [0,0,0]) then {
+		_color = [playerSide, false] call BIS_fnc_sideColor;
+	};
+
+	_color; 
 };
 
 fnc_vehicleText = {
@@ -95,7 +118,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				_text = [vehicle _x] call fnc_vehicleText;
 
 				// Increase marker size;
-				_markerSize = _markerSize * 3; 
+				_markerSize = _markerSize * 2.5; 
 
 				// Add all units in vehicle to _alreadyMarkedPlayers
 				_alreadyMarkedPlayers append (crew vehicle _x); 
