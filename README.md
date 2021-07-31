@@ -27,6 +27,7 @@ this setVariable ["BFT_marker_color", "ColorOrange"];
   - Vehicle icon colour (rn it's always white, I want it to be the right team colour or side colour if no squadmates)
   - Ace incapacitated people don't show up (Might be cause they're CIV, fix later? (: )
   - Follow DUI font setting
+  - Add setting to zeus to enable/disable their marker. Right now it'll never mark zeus. 
 - Troop overview
   - A tab on the map with all teams/units
 

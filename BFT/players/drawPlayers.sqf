@@ -32,8 +32,11 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 		
 		{
 			// _x = unit to mark 
+
+			// Exit criteria
 			if (side _x != side player) then {continue};
 			if (_x in _alreadyMarkedPlayers) then {continue};
+			if (!isNull (getAssignedCuratorLogic _x)) then {continue}; // If unit is zeus
 
 			// Basic things 
 			_icon = _x getVariable ["diwako_dui_radar_compass_icon", ""];
@@ -42,11 +45,14 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 			_dir = getDir _x; 
 
 			if (_icon == "") then {
-				
+				private _player = [] call CBA_fnc_currentUnit;
+				private _iconNamespace = missionNamespace getVariable format["diwako_dui_main_icon_%1", diwako_dui_icon_style];
+			
+				_icon = [_x, _iconNamespace, _player, true] call diwako_dui_radar_fnc_getIcon;
 			};
 
 			// Colour 
-			private _colour = [1,1,1];
+			private _colour = [playerSide, false] call BIS_fnc_sideColor;
 			if (player in (units group _x)) then {
 				_colour = + (_x getVariable "diwako_dui_main_compass_color"); // + cause otherwise we get locality issues 
 			} else {
@@ -61,6 +67,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 				// Icon (Get from config)
 				_icon = getText (configfile >> "CfgVehicles" >> typeOf vehicle _x >> "icon");
+				_markerSize = _markerSize * 2; 
 
 				// Text (Driver, SL, Medic, +count) , this ugly, might redo
 				_crew = crew vehicle _x; 
@@ -70,7 +77,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				if (count _crew >= 4) then {_text = _text + " +" + str (count _crew - 3)};
 
 				// Colour (Colour if all the same team, otherwise white) (Still to do, lazy atm)
-				_colour = [1,1,1];
+				// _colour = [1,1,1];
 
 				// Add all units in vehicle to _alreadyMarkedPlayers
 				_alreadyMarkedPlayers append (crew vehicle _x); 
@@ -93,7 +100,8 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				"TahomaB",
 				"right"
 			];
-		// } forEach allPlayers;
-		} forEach units group player;
+		} forEach allPlayers;
+		// } forEach units group player;
+		// } forEach allUnits;
 	};
 }];
