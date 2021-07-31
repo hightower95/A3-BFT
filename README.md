@@ -29,3 +29,5 @@ this setVariable ["BFT_marker_color", "ColorOrange"];
   - Follow DUI font setting
 - Troop overview
   - A tab on the map with all teams/units
+
+In the end I intend to make this into an actual mod, using CBA settings for scale etc, maybe adding settings to the menus of the editor & zeus. We'll see if i get to it. 
