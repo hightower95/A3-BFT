@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=82;
+		nextID=83;
 	};
 	class Camera
 	{
-		pos[]={1975.7502,40.876137,7385.7852};
-		dir[]={-0.81164604,-0.35381168,0.46490014};
-		up[]={-0.30706534,0.93528926,0.17588265};
-		aside[]={0.49704471,1.0058284e-007,0.86776572};
+		pos[]={2069.4138,80.805725,7364.5522};
+		dir[]={-0.61249,-0.51491606,0.599765};
+		up[]={-0.36790228,0.85724086,0.36025897};
+		aside[]={0.69964612,-2.2351742e-008,0.71449012};
 	};
 };
 binarizationWanted=0;
@@ -199,15 +199,16 @@ class Mission
 	};
 	class Entities
 	{
-		items=7;
+		items=8;
 		class Item0
 		{
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={3153.6262,63.82,6828.0454};
-				angles[]={0,1.4861574,0};
+				position[]={3153.626,63.82,6828.0449};
+				angles[]={0,1.4861653,0};
 			};
+			name="zeus";
 			id=28;
 			type="ModuleCurator_F";
 			class CustomAttributes
@@ -1490,6 +1491,7 @@ class Mission
 				};
 			};
 			id=70;
+			atlOffset=-0.0010566711;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -1530,6 +1532,7 @@ class Mission
 			};
 			id=71;
 			type="B_MRAP_01_gmg_F";
+			atlOffset=-0.0010566711;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -1554,21 +1557,284 @@ class Mission
 				nAttributes=1;
 			};
 		};
+		class Item7
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={2554.262,74.35704,7252.8101};
+			};
+			id=82;
+			type="ModuleCuratorAddEditableObjects";
+			atlOffset=-7.6293945e-006;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ModuleCuratorAddEditableObjects_Curator";
+					expression="_this setVariable ['Curator',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="zeus";
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="ModuleCuratorAddEditableObjects_AddCrew";
+					expression="_this setVariable ['AddCrew',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=1;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
 	};
 	class Connections
 	{
 		class LinkIDProvider
 		{
-			nextID=1;
+			nextID=22;
 		};
 		class Links
 		{
-			items=1;
+			items=22;
 			class Item0
 			{
 				linkID=0;
 				item0=44;
 				item1=49;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item1
+			{
+				linkID=1;
+				item0=74;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item2
+			{
+				linkID=2;
+				item0=75;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item3
+			{
+				linkID=3;
+				item0=44;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item4
+			{
+				linkID=4;
+				item0=45;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item5
+			{
+				linkID=5;
+				item0=46;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item6
+			{
+				linkID=6;
+				item0=47;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item7
+			{
+				linkID=7;
+				item0=71;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item8
+			{
+				linkID=8;
+				item0=33;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item9
+			{
+				linkID=9;
+				item0=34;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item10
+			{
+				linkID=10;
+				item0=35;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item11
+			{
+				linkID=11;
+				item0=36;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item12
+			{
+				linkID=12;
+				item0=37;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item13
+			{
+				linkID=13;
+				item0=38;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item14
+			{
+				linkID=14;
+				item0=39;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item15
+			{
+				linkID=15;
+				item0=40;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item16
+			{
+				linkID=16;
+				item0=42;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item17
+			{
+				linkID=17;
+				item0=48;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item18
+			{
+				linkID=18;
+				item0=28;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item19
+			{
+				linkID=19;
+				item0=49;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item20
+			{
+				linkID=20;
+				item0=72;
+				item1=82;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item21
+			{
+				linkID=21;
+				item0=73;
+				item1=82;
 				class CustomData
 				{
 					type="Sync";
