@@ -68,5 +68,9 @@ while {true} do {
 		_allMarkers pushBack _marker;
 	} forEach allGroups;
 
-	sleep(_delay - (serverTime % _delay));
+	if (isMultiplayer) then {
+		sleep(_delay - (serverTime % _delay));
+	} else {
+		sleep _delay;
+	}
 }
