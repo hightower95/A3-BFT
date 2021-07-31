@@ -22,6 +22,7 @@ this setVariable ["BFT_marker_color", "ColorOrange"];
 - Group markers
   - Allow custom names 
   - Show team info when clicking marker
+  - Update the colour icons in ACE interact to actually match the colours. 
 - Player markers
   - Vehicle icon colour (rn it's always white, I want it to be the right team colour or side colour if no squadmates)
   - Ace incapacitated people don't show up (Might be cause they're CIV, fix later? (: )
