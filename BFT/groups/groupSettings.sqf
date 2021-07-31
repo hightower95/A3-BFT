@@ -26,8 +26,8 @@ action_BFT = ["Jacco_BFT", "BFT", "", {true}, {leader group player == player && 
 action_BFT_Colors = ["Jacco_BFT_Colors", "Color", "BFT\icons\colorWheel.paa", {true}, {true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Colors] call ace_interact_menu_fnc_addActionToObject;
 
-// Array with available colours and the name they're displayed as
-_markerColours_side = [
+// Array with available colors and the name they're displayed as
+_markerColors_side = [
 	["ColorBLUFOR", "BLUFOR"],
 	["ColorOPFOR", "OPFOR"],
 	["colorIndependent", "Independent"],
@@ -35,7 +35,7 @@ _markerColours_side = [
 	["ColorUNKNOWN", "Unknown"]
 ];
 
-_markerColours_other = [
+_markerColors_other = [
 	["ColorRed", "Red"],
 	["ColorOrange", "Orange"],
 	["ColorYellow", "Yellow"],
@@ -49,7 +49,7 @@ _markerColours_other = [
 	["ColorWhite", "White"]
 ];
 
-// Add side colours
+// Add side colors
 {
 	_color = _x select 0; 
 	_name = _x select 1; 
@@ -61,10 +61,10 @@ _markerColours_other = [
 
 	_action = [("Jacco_BFT_Colors_"+_name), _name, "BFT\icons\dot\"+_name+".paa", _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
 	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], _action] call ace_interact_menu_fnc_addActionToObject;
-} forEach _markerColours_side;
+} forEach _markerColors_side;
 
-// Add other colours
-action_BFT_Colors_Other = ["Jacco_BFT_Colours_Other", "Other colors", "BFT\icons\plus.paa", {true}, {true}] call ace_interact_menu_fnc_createAction;
+// Add other colors
+action_BFT_Colors_Other = ["Jacco_BFT_Colors_Other", "Other colors", "BFT\icons\plus.paa", {true}, {true}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors"], action_BFT_Colors_Other] call ace_interact_menu_fnc_addActionToObject;
 
 
@@ -78,8 +78,8 @@ action_BFT_Colors_Other = ["Jacco_BFT_Colours_Other", "Other colors", "BFT\icons
 	};
 
 	_action = [("Jacco_BFT_Colors_"+_name), _name, "BFT\icons\dot\"+_name+".paa", _statement, {true}, {}, _color] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors", "Jacco_BFT_Colours_Other"], _action] call ace_interact_menu_fnc_addActionToObject;
-} forEach _markerColours_other;
+	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Colors", "Jacco_BFT_Colors_Other"], _action] call ace_interact_menu_fnc_addActionToObject;
+} forEach _markerColors_other;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Team name

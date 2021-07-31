@@ -15,7 +15,7 @@ waitUntil {
 	!isNull (findDisplay 12 displayCtrl 51);
 };
 
-fnc_vehicleIconColour = {
+fnc_vehicleIconColor = {
 	params ["_vehicle"];
 
 	_color = [0,0,0];
@@ -30,7 +30,7 @@ fnc_vehicleIconColour = {
 			continue; 
 		};
 
-		// Set color to white if the new colour is different
+		// Set color to white if the new color is different
 		if !(_color isEqualTo _teamColor) then {
 			_color = [1,1,1];
 			break;
@@ -78,7 +78,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 		{
 			// _x = unit to mark 
-			private ["_icon","_colour","_pos","_dir","_text"];
+			private ["_icon","_color","_pos","_dir","_text"];
 
 			_markerSize = (1.8 * 0.13) * _scale;
 
@@ -95,20 +95,20 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 				_icon = _x getVariable ["diwako_dui_radar_compass_icon", [] call fnc_unitIcon];
 
-				// Colour 
-				_colour = [playerSide, false] call BIS_fnc_sideColor;
+				// Color 
+				_color = [playerSide, false] call BIS_fnc_sideColor;
 				if (player in (units group _x)) then {
-					_colour = + (_x getVariable "diwako_dui_main_compass_color"); // + cause otherwise we get locality issues 
+					_color = + (_x getVariable "diwako_dui_main_compass_color"); // + cause otherwise we get locality issues 
 				} else {
-					_colour = [playerSide, false] call BIS_fnc_sideColor;
+					_color = [playerSide, false] call BIS_fnc_sideColor;
 				};
-				// if (_x getVariable ["ACE_isUnconscious", false]) then {_colour = [1, 0.5, 0];};
+				// if (_x getVariable ["ACE_isUnconscious", false]) then {_color = [1, 0.5, 0];};
 			} else { // Unit is in vehicle
 				// Icon (Get from config)
 				_icon = getText (configfile >> "CfgVehicles" >> typeOf vehicle _x >> "icon");
 
-				// Colour (Colour if all the same team, otherwise white) (Still to do, lazy atm)
-				_colour = [vehicle _x] call fnc_vehicleIconColour;
+				// Color (Color if all the same team, otherwise white) (Still to do, lazy atm)
+				_color = [vehicle _x] call fnc_vehicleIconColor;
 
 				// Position 
 				_pos = getPos vehicle _x; 
@@ -125,12 +125,12 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 			};
 
 			// Set alpha
-			_colour set [3, _alpha];
+			_color set [3, _alpha];
 
 			// Draw icon
 			_this select 0 drawIcon [
 				_icon,
-				_colour,
+				_color,
 				_pos,
 				_markerSize,
 				_markerSize,

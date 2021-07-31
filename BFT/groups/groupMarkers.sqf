@@ -48,7 +48,7 @@ while {true} do {
 			_weight = _weight + 1; 
 		} forEach units _x;
 
-		// Type & Colour 
+		// Type & Color 
 		_markerType = _x getVariable ["BFT_marker_type", "inf"];
 		_markerColor = _x getVariable ["BFT_marker_color", [playerSide, true] call BIS_fnc_sideColor];
 
