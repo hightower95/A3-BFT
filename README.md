@@ -24,7 +24,6 @@ this setVariable ["BFT_marker_color", "ColorOrange"];
   - Show team info when clicking marker
   - Update the color icons in ACE interact to actually match the colors. 
 - Player markers
-  - Vehicle icon color (rn it's always white, I want it to be the right team color or side color if no squadmates)
   - Ace incapacitated people don't show up (Might be cause they're CIV, fix later? (: )
   - Follow DUI font setting
   - Add setting to zeus to enable/disable their marker. Right now it'll never mark zeus. 
