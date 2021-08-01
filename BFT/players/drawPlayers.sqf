@@ -138,7 +138,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				_text,
 				1,
 				_textSize,
-				"RobotoCondensed",
+				diwako_dui_font,
 				"right"
 			];
 		} forEach allPlayers;
