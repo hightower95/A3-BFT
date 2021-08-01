@@ -12,6 +12,11 @@
 */
 params ["_delay", "_default"];
 
+// Set enabled variable for player group if not set yet 
+if ((group player getVariable ["BFT_marker_enable", objNull]) isEqualTo objNull) then {
+	group player setVariable ["BFT_marker_enable", true, true];
+};
+
 // Map markers
 _allMarkers = [];
 

@@ -4,6 +4,7 @@ Some scripts to keep track of your teams. Requires DUI and ACE3.
 ## **How to use**
 To add this to your mission, just [download](https://github.com/Jaccodouma/A3-BFT/archive/refs/heads/master.zip) the ZIP on the homepage and copy "initPlayerLocal.sqf" and the "BFT" folder into your mission. 
 Alternatively, just copy the BFT folder and add `[] execVM "BFT\init.sqf";` to some local init.
+The group markers automatically turn on for player groups. 
 
 ### **For mission makers**
 There's three variables used:
@@ -23,6 +24,7 @@ this setVariable ["BFT_marker_color", "ColorOrange"];
   - Allow custom names 
   - Show team info when clicking marker
   - Update the color icons in ACE interact to actually match the colors. 
+  - Enabled for player groups by default
 - Player markers
   - Ace incapacitated people don't show up (Might be cause they're CIV, fix later? (: )
   - Follow DUI font setting
