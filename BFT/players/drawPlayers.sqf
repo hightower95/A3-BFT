@@ -83,7 +83,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 			_markerSize = (1.8 * 0.13) * _scale;
 
 			// Exit criteria
-			if (side _x != side player) then {continue};
+			if (side group _x != side player) then {continue};
 			if (_x in _alreadyMarkedPlayers) then {continue};
 			if (!isNull (getAssignedCuratorLogic _x)) then {continue}; // If unit is zeus
 
@@ -99,10 +99,10 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				_color = [playerSide, false] call BIS_fnc_sideColor;
 				if (player in (units group _x)) then {
 					_color = + (_x getVariable "diwako_dui_main_compass_color"); // + cause otherwise we get locality issues 
+					if (_x getVariable ["ACE_isUnconscious", false]) then {_color = [1, 0.5, 0];};
 				} else {
 					_color = [playerSide, false] call BIS_fnc_sideColor;
 				};
-				// if (_x getVariable ["ACE_isUnconscious", false]) then {_color = [1, 0.5, 0];};
 			} else { // Unit is in vehicle
 				// Icon (Get from config)
 				_icon = getText (configfile >> "CfgVehicles" >> typeOf vehicle _x >> "icon");
@@ -138,7 +138,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				_text,
 				1,
 				_textSize,
-				"TahomaB",
+				"RobotoCondensed",
 				"right"
 			];
 		} forEach allPlayers;
