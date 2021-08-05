@@ -35,6 +35,14 @@
 	["Zulu,Lima,Uniform,Echo,Whisky,Tango"]
 ] call CBA_fnc_addSetting; // maybe a server setting?
 
+[
+	"BFT_groupMarkers_trackingMode",
+	"LIST",
+	["Tracking mode", "The way a group's position is calculated"], 
+	["BFT - Group markers", "Position"],
+	[["Leader", "WeigtedAverage"], ["Leader", "Weighted average"],1]
+] call CBA_fnc_addSetting; 
+
 // [
 // 	"BFT_groupMarkers_markZeus",
 // 	"CHECKBOX",
