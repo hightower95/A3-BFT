@@ -84,28 +84,35 @@ action_BFT_Colors_Other = ["Jacco_BFT_Colors_Other", "Other colors", "BFT\icons\
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Team name
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-action_BFT_Name = ["Jacco_BFT_Name", "Name", "BFT\icons\pen.paa", {true}, {true}] call ace_interact_menu_fnc_createAction;
+// Dynamically add children for group names
+_action_BFT_Name_insertChildren = {
+    params ["_target", "_player", "_params"];
+
+	private _actions = []; 
+	{
+		_statement = {
+			params ["_target", "_player", "_params"];
+			(group player) setGroupIdGlobal [_params];
+		};
+
+		_action = [
+			format ["Jacco_BFT_Names_%1", _x],
+			_x, 
+			"", 
+			_statement, 
+			{true}, 
+			{}, 
+			_x
+		] call ace_interact_menu_fnc_createAction;
+		_actions pushBack [_action, [], _target];
+	} forEach (BFT_groupMarkers_nameOptions splitString ",");
+
+	// Return created actions
+	_actions
+};
+
+action_BFT_Name = ["Jacco_BFT_Name", "Name", "BFT\icons\pen.paa", {true}, {true}, _action_BFT_Name_insertChildren] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions", "Jacco_BFT"], action_BFT_Name] call ace_interact_menu_fnc_addActionToObject;
-
-_teamNames = [
-	"Zulu", 
-	"Lima", 
-	"Uniform",
-	"Echo",
-	"Whiskey",
-	"Tango",
-	"X-Ray",
-	"Yankee"
-];
-
-{
-	_statement = {
-		params ["_target", "_player", "_params"];
-		(group player) setGroupIdGlobal [_params];
-	};
-	_action = ["Jacco_BFT_Names_"+_x, _x, "", _statement, {true}, {}, _x] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "Jacco_BFT", "Jacco_BFT_Name"], _action] call ace_interact_menu_fnc_addActionToObject;
-} foreach _teamNames;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Team icon 

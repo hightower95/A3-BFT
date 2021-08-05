@@ -22,10 +22,18 @@
 [
 	"BFT_groupMarkers_updateDelay",
 	"SLIDER",
-	"Update delay", 
+	["Update delay", "Delay between group marker updates."], 
 	"BFT - Group markers",
 	[1, 60, 4, 0]
 ] call CBA_fnc_addSetting; 
+
+[
+	"BFT_groupMarkers_nameOptions",
+	"EDITBOX",
+	["Group Name Options", "Names available in ACE BFT Settings, separated by comma."], 
+	"BFT - Group markers",
+	["Zulu,Lima,Uniform,Echo,Whisky,Tango"]
+] call CBA_fnc_addSetting; // maybe a server setting?
 
 // [
 // 	"BFT_groupMarkers_markZeus",

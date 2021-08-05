@@ -28,19 +28,15 @@ fnc_drawMarkerLoop = {
 
 ["CBA_SettingChanged", {
     params ["_setting", "_value"];
-    systemChat format ["%1 = %2", _setting, _value];
+	
 	switch (_setting) do {
-            case "BFT_groupMarkers_enable": {
-					if (_value) then {
-						[] spawn fnc_drawMarkerLoop;
-					}
-                };
-			default {};
+		case "BFT_groupMarkers_enable": {
+			if (_value) then {
+				[] spawn fnc_drawMarkerLoop;
+			}
+		};
+		default {};
 	}
-	// if (_setting == "BFT_groupMarkers_enable" && _value) then {
-	// 	[] spawn fnc_drawMarkerLoop;
-	// };
-
 }] call CBA_fnc_addEventHandler;
 
 [] call fnc_drawMarkerLoop;
