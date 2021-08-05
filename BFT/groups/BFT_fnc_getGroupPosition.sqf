@@ -27,43 +27,67 @@ fnc_weightedAverage = {
 	_position;
 };
 
+
 _position = position leader _group; 
 
+// Get current position 
 switch (BFT_groupMarkers_trackingMode) do 
 {
-	case "WeigtedAverage": {
-		[_group] call fnc_weightedAverage;
+	case "weightedAverage": {
+		_position = [_group] call fnc_weightedAverage;
 	};
 };
 
-if (BFT_groupMarkers_trailing) then {
-	// Add found position to the front of the array
-	_positions = _group getVariable ["BFT_Trail_Positions", []];
-	_positions = [_position] + _positions; 
+// Add current position to group variable 
+_positions = _group getVariable ["BFT_Trail_Positions", []];
+_positions = [_position] + _positions; // Add to the front of the array 
+_positions = _positions select [0, round BFT_groupMarkers_trailing_count]; // Limit the size to trailing weight. 
+_group setVariable ["BFT_Trail_Positions", _positions]; // Update variable
 
-	// Limit the size to trailing weight. 
-	_positions = _positions select [0, round BFT_groupMarkers_trailing_count];
+// Calculate new position if we're trailing 
+switch (BFT_groupMarkers_trailing) do {
+	case "weightedAverage": {
+		// Calculate new position 
+		_weight = 1; 
+		_totalWeight = 1; 
+		_position = _positions select 0;
+		{
+			// Skip the first one
+			if (_forEachIndex == 0) then {continue;};
+			_weight = _weight * BFT_groupMarkers_trailing_weight;
 
-	// Update variable
-	_group setVariable ["BFT_Trail_Positions", _positions];
+			_position = [
+				(((_position select 0) * _totalWeight) + ((_x select 0) * _weight)) / (_totalWeight + _weight),
+				(((_position select 1) * _totalWeight) + ((_x select 1) * _weight)) / (_totalWeight + _weight)
+			];
 
-	// Calculate new position 
-	_weight = 1; 
-	_totalWeight = 1; 
-	_position = _positions select 0;
-	{
-		// Skip the first one
-		if (_forEachIndex == 0) then {continue;};
-		_weight = _weight * BFT_groupMarkers_trailing_weight;
-
-		_position = [
-			(((_position select 0) * _totalWeight) + ((_x select 0) * _weight)) / (_totalWeight + _weight),
-			(((_position select 1) * _totalWeight) + ((_x select 1) * _weight)) / (_totalWeight + _weight)
-		];
-
-		_totalWeight = _totalWeight + _weight; 
-	} forEach _positions;
+			_totalWeight = _totalWeight + _weight; 
+		} forEach _positions;
+	}; 
+	case "delayed": {
+		_position = _positions select (count _positions -1);
+	};
 };
+
+// if (BFT_groupMarkers_trailing) then {
+
+// 	// Calculate new position 
+// 	_weight = 1; 
+// 	_totalWeight = 1; 
+// 	_position = _positions select 0;
+// 	{
+// 		// Skip the first one
+// 		if (_forEachIndex == 0) then {continue;};
+// 		_weight = _weight * BFT_groupMarkers_trailing_weight;
+
+// 		_position = [
+// 			(((_position select 0) * _totalWeight) + ((_x select 0) * _weight)) / (_totalWeight + _weight),
+// 			(((_position select 1) * _totalWeight) + ((_x select 1) * _weight)) / (_totalWeight + _weight)
+// 		];
+
+// 		_totalWeight = _totalWeight + _weight; 
+// 	} forEach _positions;
+// };
 
 // Return position
 _position

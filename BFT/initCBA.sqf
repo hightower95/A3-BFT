@@ -40,15 +40,15 @@
 	"LIST",
 	["Tracking mode", "The way a group's position is calculated"], 
 	["BFT - Group markers", "Position"],
-	[["Leader", "WeigtedAverage"], ["Leader", "Weighted average"],1]
+	[["Leader", "weightedAverage"], ["Leader", "Weighted average"],1]
 ] call CBA_fnc_addSetting; 
 
 [
 	"BFT_groupMarkers_trailing",
-	"CHECKBOX",
+	"LIST",
 	["Trailing mode", "Lets a group's position trail behind its actual position."], 
 	["BFT - Group markers", "Position"],
-	false
+	[["none", "weightedAverage", "delayed"], ["None", "Weighted Average", "Delayed"], 0]
 ] call CBA_fnc_addSetting; 
 
 [
