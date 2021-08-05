@@ -43,6 +43,30 @@
 	[["Leader", "WeigtedAverage"], ["Leader", "Weighted average"],1]
 ] call CBA_fnc_addSetting; 
 
+[
+	"BFT_groupMarkers_trailing",
+	"CHECKBOX",
+	["Trailing mode", "Lets a group's position trail behind its actual position."], 
+	["BFT - Group markers", "Position"],
+	false
+] call CBA_fnc_addSetting; 
+
+[
+	"BFT_groupMarkers_trailing_count",
+	"SLIDER",
+	["Trailing count", "Amount of recent positions considered."], 
+	["BFT - Group markers", "Position"],
+	[1, 25, 3, 0]
+] call CBA_fnc_addSetting; 
+
+[
+	"BFT_groupMarkers_trailing_weight",
+	"SLIDER",
+	["Trailing weight", "Factor with which the weight decreases with per position."], 
+	["BFT - Group markers", "Position"],
+	[0, 1, 0.75, 2]
+] call CBA_fnc_addSetting; 
+
 // [
 // 	"BFT_groupMarkers_markZeus",
 // 	"CHECKBOX",
