@@ -3,8 +3,8 @@ params ["_group"];
 fnc_weightedAverage = {
 	params ["_group"];
 
-	_position = position leader _x;
-	_weight = 3 * (count units _x); // Starting weight, amount of times we count the leader position.  
+	_position = position leader _group;
+	_weight = 3 * (count units _group); // Starting weight, amount of times we count the leader position.  
 	{
 		// If unit is within 500m, ignore them from position calculation
 		if ((_x distance2D (leader group _x)) > 500) then {continue};
@@ -22,7 +22,7 @@ fnc_weightedAverage = {
 
 		// Increase weight - as we've included one more unit now 
 		_weight = _weight + 1; 
-	} forEach units _x;
+	} forEach units _group;
 
 	_position;
 };
@@ -50,7 +50,7 @@ switch (BFT_groupMarkers_trailing) do {
 		// Calculate new position 
 		_weight = 1; 
 		_totalWeight = 1; 
-		_position = _positions select 0;
+		_position = [] + _positions select 0;
 		{
 			// Skip the first one
 			if (_forEachIndex == 0) then {continue;};
@@ -67,27 +67,27 @@ switch (BFT_groupMarkers_trailing) do {
 	case "delayed": {
 		_position = _positions select (count _positions -1);
 	};
+	case "projected": {
+		// Conclusion: its complicated.
+		// Kinda ok for vehicles, but doesnt work for groups on foot
+		_position = [] + _positions select (count _positions -1);
+		_velocity = velocity leader _group;
+		if(count _positions > 1) then {
+			_pos2 = _positions select (count _positions -2);
+			_velocity = [
+				(_pos2 select 0) - (_position select 0), 
+				(_pos2 select 1) - (_position select 1)
+			];
+		};
+		_dx = (round BFT_groupMarkers_updateDelay) * (_velocity select 0) /* * (BFT_groupMarkers_trailing_count - 1)*/;
+		_dy = (round BFT_groupMarkers_updateDelay) * (_velocity select 1) /* * (BFT_groupMarkers_trailing_count - 1)*/;
+
+		_position = [
+			(_position select 0) + _dx,
+			(_position select 1) + _dy
+		];
+	};
 };
-
-// if (BFT_groupMarkers_trailing) then {
-
-// 	// Calculate new position 
-// 	_weight = 1; 
-// 	_totalWeight = 1; 
-// 	_position = _positions select 0;
-// 	{
-// 		// Skip the first one
-// 		if (_forEachIndex == 0) then {continue;};
-// 		_weight = _weight * BFT_groupMarkers_trailing_weight;
-
-// 		_position = [
-// 			(((_position select 0) * _totalWeight) + ((_x select 0) * _weight)) / (_totalWeight + _weight),
-// 			(((_position select 1) * _totalWeight) + ((_x select 1) * _weight)) / (_totalWeight + _weight)
-// 		];
-
-// 		_totalWeight = _totalWeight + _weight; 
-// 	} forEach _positions;
-// };
 
 // Return position
 _position
