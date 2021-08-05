@@ -1,10 +1,10 @@
-// Settings
-_delay = 4; // Delay between squad marker updates 
-_default = false; // Sets the default show marker value for groups
+// setLightnings
+
+[] execVM "BFT\initCBA.sqf";
 
 // Squad markers 
-[] execVM "BFT\groups\groupSettings.sqf";
-[_delay, _default] execVM "BFT\groups\groupMarkers.sqf";
+[] execVM "BFT\groups\BFT_fnc_addGroupSettings.sqf";
+[] execVM "BFT\groups\BFT_fnc_initGroupMarkers.sqf";
 
 // Player markers 
 [] execVM "BFT\players\drawPlayers.sqf";
