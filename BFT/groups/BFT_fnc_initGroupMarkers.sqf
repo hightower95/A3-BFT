@@ -1,21 +1,46 @@
-params ["_delay", "_default"];
-
 // Global variable for all group markers 
 BFT_GroupMarkers = [];
 
-if (BFT_groupMarkers_enable) then {
-	while {BFT_groupMarkers_enable} do {
+// Set enabled variable for player group if not set yet 
+if ((group player getVariable ["BFT_groupMarker_visible", objNull]) isEqualTo objNull) then {
+	group player setVariable ["BFT_groupMarker_visible", true, true];
+};
+
+fnc_drawMarkerLoop = {
+	while {true} do {
 		// Remove old markers
 		[] execVM "BFT\groups\BFT_fnc_removeGroupMarkers.sqf";
 
+		// Leave loop after removing markers
+		if !(BFT_groupMarkers_enable) exitWith {};
+
 		// Create new markers 
-		[_default] execVM "BFT\groups\BFT_fnc_drawGroupMarkers.sqf";
+		[] execVM "BFT\groups\BFT_fnc_drawGroupMarkers.sqf";
 
 		// Sleep 
 		if (isMultiplayer) then {
-			sleep(_delay - (serverTime % _delay));
+			sleep(round BFT_groupMarkers_updateDelay - (serverTime % round BFT_groupMarkers_updateDelay));
 		} else {
-			sleep _delay;
+			sleep round BFT_groupMarkers_updateDelay;
 		};
 	};
 };
+
+["CBA_SettingChanged", {
+    params ["_setting", "_value"];
+    systemChat format ["%1 = %2", _setting, _value];
+	switch (_setting) do {
+            case "BFT_groupMarkers_enable": {
+					if (_value) then {
+						[] spawn fnc_drawMarkerLoop;
+					}
+                };
+			default {};
+	}
+	// if (_setting == "BFT_groupMarkers_enable" && _value) then {
+	// 	[] spawn fnc_drawMarkerLoop;
+	// };
+
+}] call CBA_fnc_addEventHandler;
+
+[] call fnc_drawMarkerLoop;

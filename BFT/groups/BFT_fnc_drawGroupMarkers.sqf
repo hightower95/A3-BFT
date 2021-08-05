@@ -1,7 +1,5 @@
-params ["_default"];
-
 {
-	if !(_x getVariable ["BFT_marker_enable", _default]) then {continue;};
+	if !(_x getVariable ["BFT_groupMarker_visible", false]) then {continue;};
 	if (count units _x <= 0) then {continue;};
 	if (side _x != playerSide) then {continue;};
 
@@ -27,8 +25,8 @@ params ["_default"];
 	} forEach units _x;
 
 	// Type & Color 
-	_markerType = _x getVariable ["BFT_marker_type", "inf"];
-	_markerColor = _x getVariable ["BFT_marker_color", [playerSide, true] call BIS_fnc_sideColor];
+	_markerType = _x getVariable ["BFT_groupMarker_type", "inf"];
+	_markerColor = _x getVariable ["BFT_groupMarker_color", [playerSide, true] call BIS_fnc_sideColor];
 
 	// Side, default to BLUFOR
 	private _markerSide = "b"; 
