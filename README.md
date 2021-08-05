@@ -24,18 +24,19 @@ this setVariable ["BFT_groupMarker_color", "ColorOrange"];
   - Allow custom names 
   - Show team info when clicking marker
   - Update the color icons in ACE interact to actually match the colors. 
-  - Enabled for player groups by default
   - Need GPS?
-  - Can be disabled within a given area (e.g. they are jammed)
+  - Can be disabled/scrambled within a given area (e.g. they are jammed)
+  - Add the options to 3DEN and Zeus
 - Player markers
   - Ace incapacitated people don't show up (Might be cause they're CIV, fix later? (: )
-  - Follow DUI font setting
+      May have fixed
   - Add setting to zeus to enable/disable their marker. Right now it'll never mark zeus. 
   - Need GPS?
 - Troop overview
   - A tab on the map with all teams/units
 - Vehicles
   - Limit vehicle speed (to match player walk / run speed)
+    The ACE function does not take speed, maybe use onEachFrame EH to poll for speed and lock.
   - Vehicle damage status easier to see
   - Can we stabilize the gun when vehicle turning? 
 
