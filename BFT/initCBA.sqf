@@ -91,3 +91,11 @@
 	"BFT - Player markers",
 	true
 ] call CBA_fnc_addSetting; 
+
+[
+	"BFT_playerMarkers_ShowToggle",
+	"CHECKBOX",
+	"Show unit marker toggle ", 
+	"BFT - Player markers",
+	false
+] call CBA_fnc_addSetting; 

@@ -11,17 +11,11 @@
 */
 
 // Add ACE options to map 
-action_Playermarkers_On = ["BFT_PlayerMarkers_On", "Enable unit marker", "BFT\icons\on.paa", {player setVariable ["BFT_playerMarker_visible", true, true]}, {visibleMap && !(player getVariable ["BFT_playerMarker_visible", true])}] call ace_interact_menu_fnc_createAction;
+action_Playermarkers_On = ["BFT_PlayerMarkers_On", "Enable unit marker", "BFT\icons\on.paa", {player setVariable ["BFT_playerMarker_visible", true, true]}, {BFT_playerMarkers_ShowToggle && visibleMap && !(player getVariable ["BFT_playerMarker_visible", true])}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], action_Playermarkers_On] call ace_interact_menu_fnc_addActionToObject;
 
-action_Playermarkers_Off = ["BFT_PlayerMarkers_Off", "Disable unit marker", "BFT\icons\off.paa", {player setVariable ["BFT_playerMarker_visible", false, true]}, {visibleMap && player getVariable ["BFT_playerMarker_visible", true]}] call ace_interact_menu_fnc_createAction;
+action_Playermarkers_Off = ["BFT_PlayerMarkers_Off", "Disable unit marker", "BFT\icons\off.paa", {player setVariable ["BFT_playerMarker_visible", false, true]}, {BFT_playerMarkers_ShowToggle && visibleMap && player getVariable ["BFT_playerMarker_visible", true]}] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], action_Playermarkers_Off] call ace_interact_menu_fnc_addActionToObject;
-
-[] spawn {
-	// Set player marker value (off if zeus)
-	sleep 5; // Zeus isn't assigned instantly
-	player setVariable ["BFT_playerMarker_visible", (isNull (getAssignedCuratorLogic player)), true];
-};
 
 // Wait until the map control actually exists, for some reason it doesnt work without this.
 waitUntil {
