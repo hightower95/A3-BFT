@@ -10,7 +10,7 @@
 // _script	Script to execute when setting is changed.  (optional) <CODE>
 // _needRestart	Setting will be marked as needing mission restart after being changed.  (optional, default false) <BOOL>
 
-
+// Group markers 
 [
 	"BFT_groupMarkers_enable", // enabled?
 	"CHECKBOX",
@@ -24,7 +24,7 @@
 	"SLIDER",
 	["Update delay", "Delay between group marker updates."], 
 	"BFT - Group markers",
-	[1, 60, 4, 0]
+	[1, 60, 5, 0]
 ] call CBA_fnc_addSetting; 
 
 [
@@ -48,7 +48,7 @@
 	"LIST",
 	["Trailing mode", "Lets a group's position trail behind its actual position."], 
 	["BFT - Group markers", "Position"],
-	[["none", "weightedAverage", "delayed"], ["None", "Weighted Average", "Delayed"], 0]
+	[["none", "weightedAverage", "delayed"], ["None", "Weighted Average", "Delayed"], 1]
 ] call CBA_fnc_addSetting; 
 
 [
@@ -56,7 +56,7 @@
 	"SLIDER",
 	["Trailing count", "Amount of recent positions considered."], 
 	["BFT - Group markers", "Position"],
-	[1, 25, 3, 0]
+	[1, 25, 5, 0]
 ] call CBA_fnc_addSetting; 
 
 [
@@ -67,12 +67,27 @@
 	[0, 1, 0.75, 2]
 ] call CBA_fnc_addSetting; 
 
-// [
-// 	"BFT_groupMarkers_markZeus",
-// 	"CHECKBOX",
-// 	"Enable marking zeus", 
-// 	"BFT - Zeus marked",
-//	1
-// ] call CBA_fnc_addSetting; // maybe a server setting?
+// Player markers 
+[
+	"BFT_playerMarkers_enable", 
+	"CHECKBOX",
+	"Enable player markers", 
+	"BFT - Player markers",
+	true // Default is true
+] call CBA_fnc_addSetting; 
 
+[
+	"BFT_playerMarkers_otherGroups",
+	"CHECKBOX",
+	"Mark other groups", 
+	"BFT - Player markers",
+	true
+] call CBA_fnc_addSetting; 
 
+[
+	"BFT_playerMarkers_AI",
+	"CHECKBOX",
+	"Mark AI", 
+	"BFT - Player markers",
+	true
+] call CBA_fnc_addSetting; 

@@ -62,6 +62,32 @@ fnc_unitIcon = {
 	[_x, _iconNamespace, _player, true] call diwako_dui_radar_fnc_getIcon;
 };
 
+fnc_getUnitsToBeMarked = {
+	_units = []; 
+
+	// Return empty if turned off  
+	if !(BFT_playerMarkers_enable) exitWith {[]};
+
+	if (BFT_playerMarkers_otherGroups) then {
+		// Mark other groups
+		{
+			if (side group _x != side player) then {continue;};
+			if (isPlayer _x || BFT_playerMarkers_AI) then {
+				_units pushBack _x; 
+			};
+		} forEach allUnits;
+	} else {
+		// Only mark own group
+		{
+			if (isPlayer _x || BFT_playerMarkers_AI) then {
+				_units pushBack _x; 
+			};
+		} forEach units group player;
+	};
+
+	_units
+};
+
 findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 	params ["_control"];
 	_maxScale = 250; // Max scale for the icons & text
@@ -114,7 +140,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				_pos = getPos vehicle _x; 
 				_dir = getDir vehicle _x; 
 
-				// Text (Driver, SL, Medic, +count) , this ugly, might redo
+				// Text
 				_text = [vehicle _x] call fnc_vehicleText;
 
 				// Increase marker size;
@@ -141,7 +167,6 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				diwako_dui_font,
 				"right"
 			];
-		} forEach allPlayers;
-		// } forEach allUnits;
+		} forEach ([] call fnc_getUnitsToBeMarked);
 	};
 }];
