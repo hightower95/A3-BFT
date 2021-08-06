@@ -1,3 +1,6 @@
+// Add settings to ACE interact menu 
+[] execVM "BFT\groups\BFT_fnc_addGroupSettings.sqf";
+
 // Global variable for all group markers 
 BFT_GroupMarkers = [];
 
