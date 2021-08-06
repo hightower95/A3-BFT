@@ -10,6 +10,19 @@
 	nothing
 */
 
+// Add ACE options to map 
+action_Playermarkers_On = ["BFT_PlayerMarkers_On", "Enable unit marker", "BFT\icons\on.paa", {player setVariable ["BFT_playerMarker_visible", true, true]}, {visibleMap && !(player getVariable ["BFT_playerMarker_visible", true])}] call ace_interact_menu_fnc_createAction;
+[player, 1, ["ACE_SelfActions"], action_Playermarkers_On] call ace_interact_menu_fnc_addActionToObject;
+
+action_Playermarkers_Off = ["BFT_PlayerMarkers_Off", "Disable unit marker", "BFT\icons\off.paa", {player setVariable ["BFT_playerMarker_visible", false, true]}, {visibleMap && player getVariable ["BFT_playerMarker_visible", true]}] call ace_interact_menu_fnc_createAction;
+[player, 1, ["ACE_SelfActions"], action_Playermarkers_Off] call ace_interact_menu_fnc_addActionToObject;
+
+[] spawn {
+	// Set player marker value (off if zeus)
+	sleep 5; // Zeus isn't assigned instantly
+	player setVariable ["BFT_playerMarker_visible", (isNull (getAssignedCuratorLogic player)), true];
+};
+
 // Wait until the map control actually exists, for some reason it doesnt work without this.
 waitUntil {
 	!isNull (findDisplay 12 displayCtrl 51);
@@ -72,14 +85,14 @@ fnc_getUnitsToBeMarked = {
 		// Mark other groups
 		{
 			if (side group _x != side player) then {continue;};
-			if (isPlayer _x || BFT_playerMarkers_AI) then {
+			if ((isPlayer _x || BFT_playerMarkers_AI) && _x getVariable ["BFT_playerMarker_visible", true]) then {
 				_units pushBack _x; 
 			};
 		} forEach allUnits;
 	} else {
 		// Only mark own group
 		{
-			if (isPlayer _x || BFT_playerMarkers_AI) then {
+			if ((isPlayer _x || BFT_playerMarkers_AI) && _x getVariable ["BFT_playerMarker_visible", true]) then {
 				_units pushBack _x; 
 			};
 		} forEach units group player;
@@ -108,10 +121,8 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 			_markerSize = (1.8 * 0.13) * _scale;
 
-			// Exit criteria
-			if (side group _x != side player) then {continue};
+			// Dont' remark already marked players 
 			if (_x in _alreadyMarkedPlayers) then {continue};
-			if (!isNull (getAssignedCuratorLogic _x)) then {continue}; // If unit is zeus
 
 			if !(_x != vehicle _x) then { // Unit is not in vehilce
 				// Basic things 
