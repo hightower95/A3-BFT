@@ -10,6 +10,13 @@
 	nothing
 */
 
+// Add ACE options to map 
+action_Playermarkers_On = ["BFT_PlayerMarkers_On", "Enable unit marker", "BFT\icons\on.paa", {player setVariable ["BFT_playerMarker_visible", true, true]}, {BFT_playerMarkers_ShowToggle && visibleMap && !(player getVariable ["BFT_playerMarker_visible", true])}] call ace_interact_menu_fnc_createAction;
+[player, 1, ["ACE_SelfActions"], action_Playermarkers_On] call ace_interact_menu_fnc_addActionToObject;
+
+action_Playermarkers_Off = ["BFT_PlayerMarkers_Off", "Disable unit marker", "BFT\icons\off.paa", {player setVariable ["BFT_playerMarker_visible", false, true]}, {BFT_playerMarkers_ShowToggle && visibleMap && player getVariable ["BFT_playerMarker_visible", true]}] call ace_interact_menu_fnc_createAction;
+[player, 1, ["ACE_SelfActions"], action_Playermarkers_Off] call ace_interact_menu_fnc_addActionToObject;
+
 // Wait until the map control actually exists, for some reason it doesnt work without this.
 waitUntil {
 	!isNull (findDisplay 12 displayCtrl 51);
@@ -62,6 +69,32 @@ fnc_unitIcon = {
 	[_x, _iconNamespace, _player, true] call diwako_dui_radar_fnc_getIcon;
 };
 
+fnc_getUnitsToBeMarked = {
+	_units = []; 
+
+	// Return empty if turned off  
+	if !(BFT_playerMarkers_enable) exitWith {[]};
+
+	if (BFT_playerMarkers_otherGroups) then {
+		// Mark other groups
+		{
+			if (side group _x != side player) then {continue;};
+			if ((isPlayer _x || BFT_playerMarkers_AI) && _x getVariable ["BFT_playerMarker_visible", true]) then {
+				_units pushBack _x; 
+			};
+		} forEach allUnits;
+	} else {
+		// Only mark own group
+		{
+			if ((isPlayer _x || BFT_playerMarkers_AI) && _x getVariable ["BFT_playerMarker_visible", true]) then {
+				_units pushBack _x; 
+			};
+		} forEach units group player;
+	};
+
+	_units
+};
+
 findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 	params ["_control"];
 	_maxScale = 250; // Max scale for the icons & text
@@ -82,10 +115,8 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 
 			_markerSize = (1.8 * 0.13) * _scale;
 
-			// Exit criteria
-			if (side group _x != side player) then {continue};
+			// Dont' remark already marked players 
 			if (_x in _alreadyMarkedPlayers) then {continue};
-			if (!isNull (getAssignedCuratorLogic _x)) then {continue}; // If unit is zeus
 
 			if !(_x != vehicle _x) then { // Unit is not in vehilce
 				// Basic things 
@@ -114,7 +145,7 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				_pos = getPos vehicle _x; 
 				_dir = getDir vehicle _x; 
 
-				// Text (Driver, SL, Medic, +count) , this ugly, might redo
+				// Text
 				_text = [vehicle _x] call fnc_vehicleText;
 
 				// Increase marker size;
@@ -141,7 +172,6 @@ findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
 				diwako_dui_font,
 				"right"
 			];
-		} forEach allPlayers;
-		// } forEach allUnits;
+		} forEach ([] call fnc_getUnitsToBeMarked);
 	};
 }];
