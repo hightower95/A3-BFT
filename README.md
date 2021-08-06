@@ -23,10 +23,13 @@ this setVariable ["BFT_groupMarker_color", "ColorOrange"];
 - Group markers
   - Allow custom names 
   - Show team info when clicking marker
-  - Update the color icons in ACE interact to actually match the colors. 
+  - Update the color icons in ACE interact to actually match the 
+  colors. 
   - Need GPS?
   - Can be disabled/scrambled within a given area (e.g. they are jammed)
   - Add the options to 3DEN and Zeus
+  - Have a list mission makers can add to. e.g. show Civ group location. 
+  - Encryption codes for group markers - maybe multiple codes? e.g. cant see where "special forces" are, but "special forces" can see you (I did a little thing here... not sure if works.. or what happens if you give a player the decryption code to an enemy unit?)
 - Player markers
   - Ace incapacitated people don't show up (Might be cause they're CIV, fix later? (: )
       May have fixed
