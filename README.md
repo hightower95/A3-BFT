@@ -44,6 +44,3 @@ this setVariable ["BFT_groupMarker_color", "ColorOrange"];
   - Can we stabilize the gun when vehicle turning? 
 
 In the end I intend to make this into an actual mod, using CBA settings for scale etc, maybe adding settings to the menus of the editor & zeus. We'll see if i get to it. 
-
-## **Dev notes**
-I used [ace's project template](https://github.com/acemod/arma-project-template) for the mod

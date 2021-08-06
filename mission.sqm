@@ -12,10 +12,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={3163.7434,69.088173,6809.6587};
-		dir[]={-0.63879335,-0.38358516,0.66694051};
-		up[]={-0.26532882,0.92350453,0.27701917};
-		aside[]={0.72218311,2.3050234e-008,0.69170463};
+		pos[]={4072.7017,171.93178,10235.917};
+		dir[]={0.89058477,-0.18584667,0.41511422};
+		up[]={0.16844676,0.98257875,0.078515433};
+		aside[]={0.42247427,0,-0.90637493};
 	};
 };
 binarizationWanted=0;
@@ -30,13 +30,14 @@ addons[]=
 	"cba_modules",
 	"A3_Characters_F_Tank",
 	"A3_Soft_F_MRAP_01",
-	"ace_realisticnames"
+	"ace_realisticnames",
+	"A3_Air_F_EPC_Plane_CAS_01"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=8;
+		items=9;
 		class Item0
 		{
 			className="A3_Modules_F_Curator";
@@ -90,6 +91,13 @@ class AddonsMetaData
 		{
 			className="A3_Soft_F";
 			name="Arma 3 Alpha - Unarmored Land Vehicles";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item8
+		{
+			className="A3_Air_F_EPC";
+			name="Arma 3 Win Episode - Aircraft";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -199,7 +207,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=8;
+		items=9;
 		class Item0
 		{
 			dataType="Logic";
@@ -1610,6 +1618,22 @@ class Mission
 				};
 				nAttributes=2;
 			};
+		};
+		class Item8
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4086.887,70.641655,10214.896};
+				angles[]={-0,5.5729165,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=83;
+			type="B_Plane_CAS_01_dynamicLoadout_F";
 		};
 	};
 	class Connections
