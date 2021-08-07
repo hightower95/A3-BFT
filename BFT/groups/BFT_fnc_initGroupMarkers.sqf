@@ -12,7 +12,8 @@ if ((group player getVariable ["BFT_groupMarker_visible", objNull]) isEqualTo ob
 fnc_drawMarkerLoop = {
 	while {BFT_groupMarkers_enable} do {		
 		// Remove old markers
-		[] execVM "BFT\groups\BFT_fnc_removeGroupMarkers.sqf";
+		_handleRemoveMarkers = [] execVM "BFT\groups\BFT_fnc_removeGroupMarkers.sqf";
+		waitUntil{ scriptDone _handleRemoveMarkers};
 
 		// Create new markers 
 		[] execVM "BFT\groups\BFT_fnc_drawGroupMarkers.sqf";
