@@ -21,12 +21,15 @@ fnc_drawMarkerLoop = {
 		// Sleep 
 		if (isMultiplayer) then {
 			_nextUpdateTime = serverTime + BFT_groupMarkers_updateDelay;
-			waitUntil {serverTime > _nextUpdateTime};
+			waitUntil {sleep 1; serverTime > _nextUpdateTime};
 		} else {
-			sleep round BFT_groupMarkers_updateDelay;
+			sleep (round BFT_groupMarkers_updateDelay);
 		};
 
 	};
+	// final cleanup
+	_handleRemoveMarkers = [] execVM "BFT\groups\BFT_fnc_removeGroupMarkers.sqf";
+	waitUntil{ scriptDone _handleRemoveMarkers};
 	// remove reference to ourself as clean up
 	player setVariable ["BFT_groupMarker_drawLoopHandle", objNull, false];
 };
@@ -39,17 +42,20 @@ fnc_drawMarkerLoop = {
 			if (_value) then {
 				// value is now set to true
 				_currentLoop = player getVariable ["BFT_groupMarker_drawLoopHandle", objNull];
-				if(_currentLoop != objNull) then {
+				if(isNull _currentLoop == false) then {
+					diag_log "BFT Warning:: Tried to start BFT_groupMarkers loop when it is already running....terminated existing loop";
 					terminate _currentLoop;
-					systemChat "Tried to start BFT_groupMarkers loop when it is already running....terminated existing loop";
 				};
-				_markerLoopHandle = [] call fnc_drawMarkerLoop;
+				_markerLoopHandle = [] spawn fnc_drawMarkerLoop;
 				player setVariable ["BFT_groupMarker_drawLoopHandle", _markerLoopHandle, false];				
-			}; 
+			} else {
+				// markers are being turned off
+				[] execVM "BFT\groups\BFT_fnc_removeGroupMarkers.sqf";
+			} 
 		};
 		default {};
 	}
 }] call CBA_fnc_addEventHandler;
 
-_markerLoopHandle = [] call fnc_drawMarkerLoop;
+_markerLoopHandle = [] spawn fnc_drawMarkerLoop;
 player setVariable ["BFT_groupMarker_drawLoopHandle", _markerLoopHandle, false];
